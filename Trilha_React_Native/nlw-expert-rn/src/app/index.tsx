@@ -5,7 +5,7 @@ import { Product } from "@/components/product"
 
 import { FlatList, View, SectionList, Text } from "react-native"
 
-import { CATEGORIES, MENU } from "@/utils/data/products"
+import { CATEGORIES, MENU, ProductProps } from "@/utils/data/products"
 import { useRef, useState } from "react"
 import { Link } from "expo-router"
 
@@ -18,7 +18,7 @@ export default function Home() {
   const cartQuantityItems = cartStore.products.reduce((total, product) => total + product.quantify, 0)
   const [category, setCategory] = useState(CATEGORIES[0])
 
-  const sectionListRef = useRef<SectionList>(null)
+  const sectionListRef = useRef<SectionList<ProductProps>>(null)
 
   function handleCategorySelect(selectedCategory: string) {
     

@@ -1,7 +1,7 @@
 import { Button } from "@/components/button";
 import { PRODUCTS } from "@/utils/data/products";
 import { formatCurrency } from "@/utils/functions/format-currency";
-import { useLocalSearchParams, useNavigation } from "expo-router";
+import { Redirect, useLocalSearchParams, useNavigation } from "expo-router";
 import { Feather } from "@expo/vector-icons"
 import { Image, Text, View } from "react-native";
 import { LinkButton } from "@/components/linkButton";
@@ -14,15 +14,22 @@ export default function Product() {
 
   const { id } = useLocalSearchParams()
 
-  const product = PRODUCTS.filter((item) => item.id === id)[0]
+  const product = PRODUCTS.find((item) => item.id === id)
 
   //console.log(id)
 
   const navigation = useNavigation()
 
   function handleAddToCard() {
-    cartStore.add(product)
-    navigation.goBack()
+    if (product) {
+      
+      cartStore.add(product)
+      navigation.goBack()
+    }
+  }
+
+  if (!product) {
+    return <Redirect href="/" />
   }
 
   return (
@@ -32,7 +39,12 @@ export default function Product() {
         className="w-full h-52"
         resizeMode="cover"
       />
+
+
       <View className="p-5 mt-8 flex-1">
+        <View className="text-white text-xl font-heading">
+          {product.title}
+        </View>
         <Text className="text-lime-400 text-2xl font-heading my-2">
           {formatCurrency(product.price)}
         </Text>
@@ -54,7 +66,7 @@ export default function Product() {
       <View className="p-5 pb-8 gap-5">
         <Button onPress={handleAddToCard}>
           <Button.Icon>
-            <Feather name="plus-circl" size={20} />
+            <Feather name="plus-circle" size={20} />
           </Button.Icon>
           <Button.Text>Adicionar ao pedido</Button.Text>
         </Button>
