@@ -6,6 +6,10 @@ import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,12 +19,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity(name = "certifications")
 public class CertificationStudentEntity {
 
@@ -29,8 +35,9 @@ public class CertificationStudentEntity {
   private UUID id;
 
   @ManyToOne
-  @JoinColumn(name = "student_id", insertable = false, updatable = false)
-  private StudentEntity studentEntity;
+  @Column(name = "student_id")
+  @JsonBackReference
+  private StudentEntity studentID;
 
   @Column(length = 100)
   private String technology;
@@ -41,7 +48,9 @@ public class CertificationStudentEntity {
   @CreationTimestamp
   private LocalDateTime createdAt;
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL)
   @JoinColumn(name = "answer_certification_id", insertable = false, updatable = false)
+
+  @JsonBackReference
   List<AnswerCertificationsEntity> answersCertificationEntities;
 }
