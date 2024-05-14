@@ -1,4 +1,4 @@
-astroid==3.1.0
+astroid==3.2.0
 blinker==1.8.2
 cfgv==3.4.0
 click==8.1.7
@@ -16,9 +16,11 @@ mccabe==0.7.0
 nodeenv==1.8.0
 pillow==10.3.0
 platformdirs==4.2.1
+pre-commit==3.7.1
+pylint==3.2.0
 python-barcode==0.15.1
 PyYAML==6.0.1
 setuptools==69.5.1
 tomlkit==0.12.5
-virtualenv==20.26.1
+virtualenv==20.26.2
 Werkzeug==3.0.3

@@ -44,4 +44,5 @@ Uma das problematicas que estive, é que o arquivo `.pylintrc` não estava sendo
 
 Quais quer alterações referentes, modificarei o ``README.md`` para mais detalhes do projeto, alterando e agrupando o histórico de alteração:
 
--  Alteração: dia 12 de Maio de 2024, às 20h56
+- Alteração: dia 12 de Maio de 2024, às 20h56
+- Alteração: dia 14 de Maio de 2024, às 10h36 
