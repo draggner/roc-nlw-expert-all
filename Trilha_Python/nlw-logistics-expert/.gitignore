@@ -1,3 +1,7 @@
-**/_pychace_
+**/_pycache_
 
 .venv
+
+.vscode
+
+.pytest_cache
