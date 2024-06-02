@@ -39,8 +39,16 @@ builder.Services.AddSwaggerGen(options =>{
 
 
 builder.Services.AddScoped<AuthenticationUserAttribute>();
-builder.Services.AddScoped<LoggedUser>();
+builder.Services.AddScoped<ILoggedUser, LoggedUser>();
 builder.Services.AddScoped<CreatedOfferUseCase>();
+builder.Services.AddScoped<GetCurrentAuctionUseCase>();
+builder.Services.AddScoped<IActionRepository, AuctionRepository>();
+builder.Services.AddScoped<IOfferRepository, OfferRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddDbContext<RocketseatAuctionDbContext>(options =>
+{
+	options.UseSqlite(@"Data Source=C:\Users\Lenovo\Desktop\draggner\Platform\Rocketseat\Event\2024 NLW 14 Expert\NLW_Expert_Projects\Trilha_C-Sharp\RocketseatAuction\leilaoDbNLW.db");
+});
 
 var app = builder.Build();
 

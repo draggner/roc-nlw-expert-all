@@ -1,11 +1,17 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using RocketseatAuction.API.Contracts;
 
 namespace RocketseatAuction.API.Filters;
 
-public class AuthenticationUserAttribute : AuthorizeAttribute, IAuthorizationFilter, IAuthorizationFilter
+public class AuthenticationUserAttribute : AuthorizeAttribute, IAuthorizationFilter
 {
   
+  private readonly IUserRepository _repository;
+
+  public AuthenticationUserAttribute(IUserRepository repository) => _repository = repository;
+
   public void OnAuthorization(AuthorizationFilterContext context)
   {
 
